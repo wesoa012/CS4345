@@ -1,31 +1,28 @@
+import { Button } from "@mui/material";
 import React from "react";
 import { useEffect, useState } from "react"
-
-
-import { Login } from "../Login/Login";
-
-
+import { useNavigate } from "react-router";
+import { CurrUserContext } from "../../Context/CurrUserContext";
 
 export const Homepage = () => {
-    const [tryingToLogin, setTryingToLogin] = useState(false);
-    // const [viewingNotification, setViewingNotification] = useState(false);
-    
+    // let curruser = CurrUserContext
 
     useEffect(() => {
-
+        if (localStorage.getItem("currUser") === undefined) {
+            localStorage.setItem("currUser", "{}");
+        }
     }, []);
 
+    const navigate = useNavigate();
+
     return (<div className="Homepage">
-
-        {<div>
-            {tryingToLogin === true &&
-                <Login setTryingToLogin={x => setTryingToLogin(x)} />}
-            <button type="button" className="btn btn-primary rounded" onClick={() => setTryingToLogin(true)}>Login</button>
-
-            {/* Notifications */}
-            
-
-        </div>}
+        
+            {localStorage.getItem("currUser") === "{}" && <div className="beforeLogin">
+                <Button type="button" className="btn btn-primary rounded" onClick={() => navigate("/login")}>Login</Button>
+            </div>}
+            {localStorage.getItem("currUser") !== "{}" && <div className="loggedIn">
+                <Button type="button" className="btn btn-primary rounded" onClick={() => logout()}>Logout</Button>
+            </div>}
 
     </div >)
 }
