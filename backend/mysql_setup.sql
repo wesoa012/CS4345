@@ -13,15 +13,17 @@ USE db;
 --     UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE
 -- );
 
+DROP TABLE `cs4345`.`accounts`;
+
 -- ACCOUNT TABLE
 CREATE TABLE `cs4345`.`accounts` (
-    `account_id` SERIAL,
-    `username` VARCHAR(100) NOT NULL,
+    `smu_id` BIGINT UNSIGNED NOT NULL PRIMARY KEY,
     `password` VARCHAR(255) NOT NULL,
     `first_name` VARCHAR(255) NOT NULL,
     `last_name` VARCHAR(255) NOT NULL,
     `role_id` BIGINT UNSIGNED NOT NULL,
-    PRIMARY KEY (`account_id`)
+    `email` VARCHAR(255) NOT NULL
+
 );
 
 
