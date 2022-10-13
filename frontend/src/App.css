@@ -1,0 +1,39 @@
+* {
+    /* font-family: 'Advent Pro', sans-serif; */
+}
+/* .btn {
+    font-family: 'Advent Pro', sans-serif;
+} */
+
+.rounded {
+    border-radius: .5em;
+}
+
+.slightly-rounded {
+    border-radius: .25em;
+}
+
+.text {
+    border: none;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.2);
+}
+.OverShield {
+    background-color: black;
+    position: fixed;
+    opacity: 50%;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.NotificationBox {
+    position: fixed;
+    
+    right: 20%;
+    top: 10%;
+    background-color: white;
+    height: 80%;
+    width: 60%;
+    flex-shrink: 1;
+}
+

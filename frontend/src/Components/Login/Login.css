@@ -1,0 +1,13 @@
+.LoginBox {
+    position: fixed;
+    background-color: white;
+    height: 80%;
+    width: 60%;
+    top: 10%;
+    flex-shrink: 1;
+}
+
+.Login {
+    display: flex;
+    justify-content: center;
+}
