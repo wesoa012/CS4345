@@ -26,20 +26,20 @@ const logger = log({ console: true, file: false, label: config.name });
 // specify middleware to use
 app.use(bodyParser.json());
 
-// let corOptions;
+let corOptions;
 
-// if(process.env.REACT_CLIENT_ORIGIN === undefined){
-//   corOptions = {
-//     origin: 'http://localhost:3000',
-//     credentials: true,
-//   };
-// }
-// else{
-//   corOptions = {
-//     origin: process.env.REACT_CLIENT_ORIGIN,
-//     credentials: true,
-//   };
-// }
+if(process.env.REACT_CLIENT_ORIGIN === undefined){
+  corOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+  };
+}
+else{
+  corOptions = {
+    origin: process.env.REACT_CLIENT_ORIGIN,
+    credentials: true,
+  };
+}
 
 
 // // enable files upload
@@ -49,11 +49,11 @@ app.use(bodyParser.json());
 //   },
 // }));
 
-// app.use(cors(corOptions));
+app.use(cors(corOptions));
 
-// app.use(ExpressAPILogMiddleware(logger, { request: true }));
+app.use(ExpressAPILogMiddleware(logger, { request: true }));
 
-// app.use('/static', express.static('public'))
+app.use('/static', express.static('public'))
 
 
 const session = require('express-session');
@@ -106,5 +106,5 @@ const server = app.listen(config.port, config.host, (e) => {
 });
 
 // const {websockets} = require("./websockets");
-console.log("testttt");
+// console.log("testttt");
 
