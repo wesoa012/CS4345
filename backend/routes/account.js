@@ -14,6 +14,7 @@ router.post("/api/account/register", async (req, res, next) => {
     console.log("HEY IM HERE> PLEASE SEND HELP CAUSE I AM WORKING")
     let username = req.body.username;
     let password = req.body.password;
+    let email = req.body.email;
 
     // Check for required parameters
     if(username === undefined || password === undefined){
@@ -24,7 +25,7 @@ router.post("/api/account/register", async (req, res, next) => {
     // Optional parameters
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
-    let roleId;
+    let roleId = 1;
 
     if (firstName === undefined){
         firstName = "";
@@ -32,27 +33,9 @@ router.post("/api/account/register", async (req, res, next) => {
     if(lastName === undefined) {
         lastName = "";
     }
-
-    // let roles;
-
-    // try{
-    //     roles = await findRole(util.STUDENT_ROLE_TYPE, schoolId,  null);
-
-    //     if(!roles || roles.length === 0){
-    //         roleId = await createRole(util.STUDENT_ROLE_TYPE, schoolId, null);
-    //         if(roleId === undefined){
-    //             res.status(500).send("Failed to make new role");
-    //             return;
-    //         }
-    //     }
-    //     else {
-    //         roleId = roles[0].role_id;
-    //     }
-
-    // } catch(error) {
-    //     return next(error);
-    // }
-
+    if(email === undefined) {
+        email = "";
+    }
 
     // Hash password
     const hash = crypto
@@ -75,9 +58,9 @@ router.post("/api/account/register", async (req, res, next) => {
     }
 
     // Insert new account into DB
-    let accountId;
+    let smu_id;
     try {
-        let [result, _] = await pool.execute('INSERT INTO `accounts`(username, password, first_name, last_name, role_id) VALUES (?, ?, ?, ?, ?)',
+        let [result, _] = await pool.execute('INSERT INTO `accounts`(smu_id, password, first_name, last_name, role_id) VALUES (?, ?, ?, ?, ?)',
             [username, hash, firstName, lastName, 1]);
 
         accountId = result.insertId;
@@ -92,7 +75,7 @@ router.post("/api/account/register", async (req, res, next) => {
 
 // POST /account/login
 router.post("/api/account/login", async (req, res, next) => {
-    let username = req.body.username;
+    let smu_id = req.body.smu_id;
     let password = req.body.password;
 
     // Check for required parameters
@@ -127,21 +110,11 @@ router.post("/api/account/login", async (req, res, next) => {
     }
 
     let user = rows[0];
-    let accountId = user.account_id ? user.account_id : -1;
-    let roleType = "";
+    smu_id = user.smu_id ? user.smu_id : -1;
 
-    if(user.role_id) {
-        let role = await getRoleById(user.role_id);
-        if(role)
-            roleType = role.role_type;
-    }
 
     // This initializes the login session.
-    req.session.accountId = user.account_id;
-    req.session.username = username;
-    req.session.roleType = roleType;
-    res.cookie('username', username);
-    res.cookie('role_type', roleType);
+    req.session.smu_id = user.smu_id;
     res.cookie('account_id', accountId);
 
     try {
@@ -150,7 +123,7 @@ router.post("/api/account/login", async (req, res, next) => {
         return next(error);
     }
 
-    res.json({success: 1, error: "", username: username, account_id: user.account_id});
+    res.json({success: 1, error: "", smu_id: smu_id});
 });
 
 
