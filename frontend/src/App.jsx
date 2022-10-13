@@ -7,12 +7,13 @@ import "./App.css"
 
 //Pages to be loaded
 import { Homepage } from "./Components/Homepage/Homepage";
-import { Profile } from "./Components/Profile/Profile";
-import { NotificationPage } from "./Components/NotificationPage/NotificationPage";
+import { LoginPage } from "./Components/Login/LoginPage";
+import { SignUpPage } from "./Components/Login/SignUpPage";
 import ResponsiveAppBar from "./Components/ResponsiveAppBar/ResponsiveAppBar";
 
 
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
+
 
 
 
@@ -28,8 +29,10 @@ export const App = () => {
                 <Routes>
 
                     <Route path="/" element={<Homepage />} />
-                    <Route path="/users/:username" element={<Profile />} />
-                    <Route path="/notifications" element={<NotificationPage />} />
+                    {/* <Route path="/users/:username" element={<Profile />} /> */}
+                    {/* <Route path="/notifications" element={<NotificationPage />} /> */}
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignUpPage />} />
                     {/* <Route path="*" element={<LostPage/>}/> */}
                 </Routes>
             </BrowserRouter>
