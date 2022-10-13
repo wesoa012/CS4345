@@ -18,9 +18,9 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { CurrUserContext } from '../../Context/CurrUserContext';
 import { useContext } from 'react';
 
-import { NotificationMenu } from "../NotificationMenu/NotificationMenu";
-import { NotificationBox } from "../NotificationBox/NotificationBox";
-import { useNavigate } from 'react-router-dom';
+// import { NotificationMenu } from "../NotificationMenu/NotificationMenu";
+// import { NotificationBox } from "../NotificationBox/NotificationBox";
+// import { useNavigate } from 'react-router-dom';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -136,8 +136,8 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
           <Box className='mx-2'>
-            <NotificationMenu notifications={currUser.notifications}
-              openNotification={x => currUser.openNotification(x)} />
+            {/* <NotificationMenu notifications={currUser.notifications}
+              openNotification={x => currUser.openNotification(x)} /> */}
             {/* {console.log(currUser.notifications)} */}
 
           </Box>
