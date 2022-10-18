@@ -49,7 +49,7 @@ export const LoginPage = (props) => {
     // Component Methods
     const login = () => {
         let credentials = {
-            "username": username,
+            "smu_id": smu_id,
             "password": password
         };
         logIntoAccount(credentials).then(res => checkIfLoginSucc(res)).catch();
@@ -60,14 +60,16 @@ export const LoginPage = (props) => {
         }
         else {
             console.log("logging in now...");
-            getAccountbyId(res.account_id)
-                .then(x => {
-                    reconnectWS();
+            // getAccountbyId(res.smu_id)
+            //     .then(x => {
+            //         reconnectWS();
 
-                    localStorage.setItem("currUser", JSON.stringify(x));
-                    props.setNavigated(0);
-                    navigate('/');
-                });
+            //         localStorage.setItem("currUser", JSON.stringify(x));
+            //         props.setNavigated(0);
+            //         navigate('/');
+            //     });
+            localStorage.setItem("currUser", `{smu_id: ${res.smu_id}}`);
+            navigate('/');
         }
     }
 

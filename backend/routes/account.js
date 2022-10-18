@@ -4,6 +4,7 @@ const pool = require('../db');
 const secret = 'not-a-secret';
 const crypto = require('crypto');
 const util = require('../util');
+
 const {getUsernameFromId, isUserAuthenticated, getRoleById, validateBody} = require("../util");
 // const {uploadImage} = require("../s3");
 // const {isUserOnline} = require('../websockets');
@@ -12,13 +13,13 @@ const {getUsernameFromId, isUserAuthenticated, getRoleById, validateBody} = requ
 // POST /account/register
 router.post("/api/account/register", async (req, res, next) => {
     console.log("HEY IM HERE> PLEASE SEND HELP CAUSE I AM WORKING")
-    let username = req.body.username;
+    let smu_id = req.body.smu_id;
     let password = req.body.password;
     let email = req.body.email;
 
     // Check for required parameters
-    if(username === undefined || password === undefined){
-        console.log("yeah, you are dumb. The username or password is undefined")
+    if(smu_id === undefined || password === undefined){
+        console.log("yeah, you are dumb. The smu_id or password is undefined")
         return res.sendStatus(400);
     }
 
@@ -46,7 +47,7 @@ router.post("/api/account/register", async (req, res, next) => {
     // Query DB for an already existing account
     let rows, fields;
     try{
-        [rows, fields] = await pool.execute('SELECT * FROM `accounts` WHERE `username` = ?', [username]);
+        [rows, fields] = await pool.execute('SELECT * FROM `accounts` WHERE `smu_id` = ?', [smu_id]);
     } catch(error){
         return next(error);
     }
@@ -58,18 +59,15 @@ router.post("/api/account/register", async (req, res, next) => {
     }
 
     // Insert new account into DB
-    let smu_id;
     try {
-        let [result, _] = await pool.execute('INSERT INTO `accounts`(smu_id, password, first_name, last_name, role_id) VALUES (?, ?, ?, ?, ?)',
-            [username, hash, firstName, lastName, 1]);
-
-        accountId = result.insertId;
+        let [result, _] = await pool.execute('INSERT INTO `accounts`(smu_id, password, first_name, last_name, role_id, email) VALUES (?, ?, ?, ?, ?, ?)',
+            [smu_id, hash, firstName, lastName, 1, email]);
 
     } catch (error) {
         return next(error);
     }
 
-    res.status(200).json({success: 1, error: "", accountId: accountId});
+    res.status(200).json({success: 1, error: "", smu_id: smu_id});
 });
 
 
@@ -79,7 +77,7 @@ router.post("/api/account/login", async (req, res, next) => {
     let password = req.body.password;
 
     // Check for required parameters
-    if(username === undefined || password === undefined){
+    if(smu_id === undefined || password === undefined){
         return res.sendStatus(400);
     }
 
@@ -92,8 +90,8 @@ router.post("/api/account/login", async (req, res, next) => {
     // Query DB for credentials
     let rows, fields;
     try{
-        [rows, fields] = await pool.execute('SELECT * FROM `accounts` WHERE `username` = ? AND `password` = ?',
-            [username, hash]);
+        [rows, fields] = await pool.execute('SELECT * FROM `accounts` WHERE `smu_id` = ? AND `password` = ?',
+            [smu_id, hash]);
     } catch(error){
         return next(error);
     }
@@ -115,13 +113,13 @@ router.post("/api/account/login", async (req, res, next) => {
 
     // This initializes the login session.
     req.session.smu_id = user.smu_id;
-    res.cookie('account_id', accountId);
+    res.cookie('smu_id', smu_id);
 
-    try {
-        await setStatusOnline(username);
-    } catch(error) {
-        return next(error);
-    }
+    // try {
+    //     await setStatusOnline(username);
+    // } catch(error) {
+    //     return next(error);
+    // }
 
     res.json({success: 1, error: "", smu_id: smu_id});
 });
@@ -131,13 +129,12 @@ router.post("/api/account/login", async (req, res, next) => {
 router.get("/api/account/logout", isUserAuthenticated, async (req, res, next) => {
     // Clear the login session.
 
-    let username = req.session.username;
+    let smu_id = req.session.smu_id;
 
-    res.cookie('username', "");
-    res.cookie('account_id', "");
+    res.cookie('smu_id', "");
 
     try {
-        await setStatusOffline(username);
+        await setStatusOffline(smu_id);
     } catch(error) {
         logger.info("Failed to update status to offline.");
         return next(error);
