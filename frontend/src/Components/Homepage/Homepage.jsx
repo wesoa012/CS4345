@@ -3,7 +3,11 @@ import React from "react";
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router";
 import { logout } from "../../api/loginApi";
+<<<<<<< Updated upstream
 import { CurrUserContext } from "../../Context/CurrUserContext";
+=======
+import { StudentDashboard } from "../Dashboards/StudentDashboard";
+>>>>>>> Stashed changes
 
 export const Homepage = () => {
     // let curruser = CurrUserContext
