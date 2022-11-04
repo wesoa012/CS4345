@@ -8,17 +8,18 @@ export const BACKEND_ENDPOINT = "http://localhost:8000";
 export const registerAccount = async (credentials) =>  {
     console.log("Registering...");
 
-    const res = await axios.post(`${BACKEND_ENDPOINT}/api/account/register`, credentials);
-    if(res.status !== 200){
+    const res = await axios.post(`${BACKEND_ENDPOINT}/register`, credentials);
+    if(res.status !== 201){
         console.log(`Couldn't register. ${res.status}`)
         return null;
     }
-    return res.data;
+    console.log(res)
+    return res;
 };
 
-export const logIntoAccount = async (credentials) => {
-    console.log("Logging in...");
-    const res = await axios.post(`${BACKEND_ENDPOINT}/api/account/login`, credentials);
+export const logIntoAccount = async (user) => {
+    console.log("Logging in... with credentials =", user);
+    const res = await axios.post(`${BACKEND_ENDPOINT}/login`, user);
     if(res.status !== 200){
         console.log(`Couldn't log in. ${res.status}`)
         return null;
@@ -27,10 +28,12 @@ export const logIntoAccount = async (credentials) => {
 };
 
 export const logout = async () => {
-    try {
-        const res = await axios.get(`${BACKEND_ENDPOINT}/api/account/logout`);
-        Cookies.remove("account_id");
-    } catch(e) {
-        console.log(`Failed to logout.: ${e}`)
-    }
+    localStorage.currUser = "{}";
+    return;
+    // try {
+    //     const res = await axios.get(`${BACKEND_ENDPOINT}/api/account/logout`);
+    //     Cookies.remove("account_id");
+    // } catch(e) {
+    //     console.log(`Failed to logout.: ${e}`)
+    // }
 }
