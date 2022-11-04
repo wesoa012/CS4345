@@ -13,7 +13,7 @@ USE db;
 --     UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE
 -- );
 
-DROP TABLE `cs4345`.`accounts`;
+-- DROP TABLE `cs4345`.`accounts`;
 
 -- ACCOUNT TABLE
 CREATE TABLE `cs4345`.`accounts` (
