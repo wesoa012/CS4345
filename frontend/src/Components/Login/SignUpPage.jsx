@@ -50,13 +50,13 @@ export const SignUpPage = (props) => {
             let temp = {
                 "smu_id": smu_id,
                 "password": password,
-                "firstName": firstName,
-                "lastName": lastName,
+                "first_name": firstName,
+                "last_name": lastName,
                 "email": email
             };
             registerAccount(temp)
                 .then(res => {
-                    if (res.success !== 1) {
+                    if (res.status !== 201) {
                         window.alert(`Failed to Sign Up. ${res.error}`);
                     }
                     else {
