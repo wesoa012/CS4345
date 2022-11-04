@@ -9,6 +9,7 @@ import { Homepage } from "./Components/Homepage/Homepage";
 import { LoginPage } from "./Components/Login/LoginPage";
 import { SignUpPage } from "./Components/Login/SignUpPage";
 import ResponsiveAppBar from "./Components/ResponsiveAppBar/ResponsiveAppBar";
+import { SubmittedApplications } from "./Components/StudentViews/SubmittedApplications";
 
 
 // import 'bootstrap/dist/css/bootstrap.css';
@@ -28,6 +29,7 @@ export const App = () => {
                     <Route path="/" element={<Homepage />} />
                     {/* <Route path="/users/:username" element={<Profile />} /> */}
                     {/* <Route path="/notifications" element={<NotificationPage />} /> */}
+                    <Route path="/accounts/:id/applications" element={<SubmittedApplications/>}/>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignUpPage />} />
                     {/* <Route path="*" element={<LostPage/>}/> */}
