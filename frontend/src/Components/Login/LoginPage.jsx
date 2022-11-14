@@ -48,6 +48,7 @@ export const LoginPage = (props) => {
 
     // Component Methods
     const login = () => {
+        console.log("sending to backend")
         let credentials = {
             "smu_id": smu_id,
             "password": password
@@ -60,15 +61,7 @@ export const LoginPage = (props) => {
         }
         else {
             console.log("logging in now...");
-            // getAccountbyId(res.smu_id)
-            //     .then(x => {
-            //         reconnectWS();
-
-            //         localStorage.setItem("currUser", JSON.stringify(x));
-            //         props.setNavigated(0);
-            //         navigate('/');
-            //     });
-            localStorage.setItem("currUser", `{smu_id: ${res.smu_id}}`);
+            localStorage.setItem("currUser", JSON.stringify(res));
             navigate('/');
         }
     }

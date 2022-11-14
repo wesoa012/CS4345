@@ -14,8 +14,6 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-
-import { CurrUserContext } from '../../Context/CurrUserContext';
 import { useContext } from 'react';
 
 // import { NotificationMenu } from "../NotificationMenu/NotificationMenu";
@@ -44,7 +42,6 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
-  const currUser = useContext(CurrUserContext);
 
   return (
     <AppBar position="static" sx={{ background: "rgb(0, 0, 0)" }}>
@@ -170,7 +167,7 @@ const ResponsiveAppBar = () => {
               ))}
             </Menu>
           </Box>
-          {currUser.currNotification && <NotificationBox />}
+          {/* {currUser.currNotification && <NotificationBox />} */}
         </Toolbar>
       </Container>
     </AppBar>
