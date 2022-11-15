@@ -4,28 +4,80 @@ const express = require('express');
 router = express.Router();
 router.use(bodyParser.json());
 
-
-
-router.get('/:id', async (req, res, next) => {
-    let accountId = parseInt(req.params.id);
-    //let accountId = req.query.id; //Don't know whether params or body will be used
-    if(typeof(accountId) !== 'number' || !accountId)
-    {
-        console.log("account_id is not type Number");
-        res.status(400).send();
+router.post('/', async(req, res, next) => {
+    try {
+        const body = req.body;
+        console.log(body);
+        const result = await req.models.course.createCourse(body);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Course creation failed:', err);
+        res.status(500).json({ message: err.toString() });
     }
-    else{
-        const tenantByID = await req.models.tenant.fetchTenantByID(accountId);
-        //will return 404 not found if id does not exist
-        if(JSON.stringify(tenantByID) == '[]')
-        {
-            console.log("No user found with id", accountId)
-            res.status(404).send();
-        }
-        else
-        {
-            res.json(tenantByID);
-        }
+    next();
+});
+
+router.put('/:id', async(req, res, next) => {
+    try {
+        const cId = req.params.course_id;
+        const body = req.body;
+        console.log(body);
+        const result = await req.models.course.updateCourseData(id, body);
+        res.status(200).json(result);
+    } catch (err) {
+        console.error('Course update failed:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+    next();
+});
+
+// get all courses
+router.get('/', async (req, res, next) => {
+    try {
+        const result = await req.models.course.getAllCourses();
+        res.status(200).json(result);
+    } catch (err) {
+        console.error('Course not found:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+    next();
+});
+
+// get by course id
+router.get('/:course_id', async (req, res, next) => {
+    try {
+        const id = req.params.course_id;
+        const result = await req.models.course.getCourseId(id);
+        res.status(200).json(result);
+    } catch (err) {
+        console.error('Course not found:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+    next();
+});
+
+// get by course name
+router.get('/:course_name', async (req, res, next) => {
+    try {
+        const name = req.params.course_name;
+        const result = await req.models.course.getByCourseName(name);
+        res.status(200).json(result);
+    } catch (err) {
+        console.error('Course not found:', err);
+        res.status(500).json({ message: err.toString() });
+    }
+    next();
+});
+
+// get by professor id
+router.get('/:professor_id', async (req, res, next) => {
+    try {
+        const id = req.params.professor_id;
+        const result = await req.models.course.getByProfessorId(id);
+        res.status(200).json(result);
+    } catch (err) {
+        console.error('Course not found:', err);
+        res.status(500).json({ message: err.toString() });
     }
     next();
 });
