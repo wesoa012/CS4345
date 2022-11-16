@@ -8,17 +8,11 @@ const createApplication = async (body) => {
     const grade = body.grade;
     return this.getByApplicationNum(application_num);
 }
-module.exports = {
-    createApplication
-}
 
 const getAllApplications = async () => {
     const query = knex(APPLICATION_TABLE)
     const results = await query;
     return results;
-}
-module.exports = {
-    getAllApplications
 }
 
 const getByApplicationNum = async (application_num) => {
@@ -26,17 +20,11 @@ const getByApplicationNum = async (application_num) => {
     const results = await query;
     return results;
 }
-module.exports = {
-    getByApplicationNum
-}
 
 const getBySMUId = async (smu_id) => {
     const query = knex(APPLICATION_TABLE).where({ smu_id })
     const results = await query;
     return results;
-}
-module.exports = {
-    getBySMUId
 }
 
 const getByGrade = async (grade) => {
@@ -44,6 +32,11 @@ const getByGrade = async (grade) => {
     const results = await query;
     return results;
 }
+
 module.exports = {
+    createApplication,
+    getAllApplications,
+    getByApplicationNum,
+    getBySMUId,
     getByGrade
 }

@@ -9,17 +9,11 @@ const createCourse = async (body) => {
     const syllabus = body.syllabus;
     return this.getByCourseId(course_id);
 }
-module.exports = {
-    createCourse
-}
 
 const getAllCourses = async () => {
     const query = knex(COURSE_TABLE);
     const results = await query;
     return results;
-}
-module.exports = {
-    getAllCourses
 }
 
 const getByCourseId = async (course_id) => {
@@ -27,26 +21,17 @@ const getByCourseId = async (course_id) => {
     const results = await query;
     return results;
 }
-module.exports = {
-    getByCourseId
-}
 
 const getByCourseName = async (course_name) => {
     const query = knex(COURSE_TABLE).where({ course_name })
     const results = await query;
     return results;
 }
-module.exports = {
-    getByCourseName
-}
 
 const getByProfessorId = async (course_name) => {
     const query = knex(COURSE_TABLE).where({ professor_id })
     const results = await query;
     return results;
-}
-module.exports = {
-    getByProfessorId
 }
 
 const updateCourseData = async (course_id, professor_id) => {
@@ -65,9 +50,6 @@ const updateCourseData = async (course_id, professor_id) => {
     const newRecord = knex(COURSE_TABLE).where({ course_id });
     return newRecord;
 }
-module.exports = {
-    updateCourseData
-}
 
 const updateCourseName = async (course_id, professor_id) => {
     const course_name = knex(COURSE_TABLE).where({ course_id }).where({ professor_id }).set({ course_name });
@@ -79,4 +61,13 @@ const updateDescription = async (course_id, professor_id) => {
 
 const updateSyllabus = async (course_id, professor_id) => {
     const syllabus = knex(COURSE_TABLE).where({ course_id }).where({ professor_id }).set({ syllabus });
+}
+
+module.exports = {
+    createCourse,
+    getAllCourses,
+    getByCourseId,
+    getByCourseName,
+    getByProfessorId,
+    updateCourseData
 }
