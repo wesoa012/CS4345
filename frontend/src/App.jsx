@@ -9,9 +9,10 @@ import { Homepage } from "./Components/Homepage/Homepage";
 import { LoginPage } from "./Components/Login/LoginPage";
 import { SignUpPage } from "./Components/Login/SignUpPage";
 import ResponsiveAppBar from "./Components/ResponsiveAppBar/ResponsiveAppBar";
+import { CourseList } from "./Components/Courses/CourseList";
 
 
-// import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 
@@ -31,6 +32,7 @@ export const App = () => {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignUpPage />} />
                     {/* <Route path="*" element={<LostPage/>}/> */}
+                    <Route path="/courses" element={<CourseList />}/>
                 </Routes>
             </BrowserRouter>
     </div>

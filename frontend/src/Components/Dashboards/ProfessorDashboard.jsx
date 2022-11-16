@@ -11,7 +11,8 @@ export const ProfessorDashboard = () => {
     const navigate = useNavigate();
 
     return (<div className="Dashboard">
-            <Button className="btn btn-primary" onClick={() => {navigate(`/accounts/${currUser.smu_id}/applications`)}}>Submitted Applications</Button>
-            <Button className="btn btn-primary" onClick={() => {navigate("/applications")}}>Applications</Button>
+            <Button className="btn btn-primary" onClick={() => {navigate(`/accounts/${currUser.smu_id}/applications`)}}>Add Course</Button>
+            <Button className="btn btn-primary" onClick={() => {navigate("/courses")}}>View My Courses</Button>
+        
     </div >)
 }
