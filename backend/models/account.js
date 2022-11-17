@@ -10,6 +10,8 @@ const fetchAccountBySmu_id = async (smu_id) => {
 
 const changeRole = async (smu_id, role_id) => {
    //uses id to update their role_id
+   console.log("smu_id =", smu_id)
+   console.log("role_id =", role_id)
    const query = knex(ACCOUNT_TABLE).update({ role_id }).where({ smu_id });
    const results = await query;
    return results;
