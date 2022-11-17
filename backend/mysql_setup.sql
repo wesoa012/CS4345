@@ -1,8 +1,3 @@
--- create database db
-CREATE DATABASE db;
-
--- use newly create database
-USE db;
 
 -- -- create table in db
 -- CREATE TABLE `db`.`users` (
@@ -16,6 +11,8 @@ USE db;
 -- DROP TABLE `cs4345`.`accounts`;
 
 -- ACCOUNT TABLE
+CREATE DATABASE IF NOT EXISTS cs4345;
+USE cs4345;
 CREATE TABLE `cs4345`.`accounts` (
     `smu_id` BIGINT UNSIGNED NOT NULL PRIMARY KEY,
     `password` VARCHAR(255) NOT NULL,
@@ -23,15 +20,31 @@ CREATE TABLE `cs4345`.`accounts` (
     `last_name` VARCHAR(255) NOT NULL,
     `role_id` BIGINT UNSIGNED NOT NULL,
     `email` VARCHAR(255) NOT NULL
-
 );
 
+CREATE TABLE `cs4345`.`courses` (
+    `course_id` BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `course_name` VARCHAR(50) NOT NULL,
+    `description` VARCHAR(500) NOT NULL,
+    `professor_id` BIGINT UNSIGNED NOT NULL REFERENCES accounts(smu_id),
+    `syllabus` BLOB NOT NULL
+);
 
-# INSERT INTO `cs4345`.`accounts` (username, password, first_name, last_name, role_id)
-#     VALUES (
-#             'alex',
-#             'alex',
-#             'alex',
-#             'cerpa',
-#             1
-#     );
+CREATE TABLE `cs4345`.`course_times` (
+    `id?` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `time_slot` INT NOT NULL,
+    `course_id` BIGINT UNSIGNED NOT NULL REFERENCES applications(application_num)
+);
+
+CREATE TABLE `cs4345`.`applications` (
+    `application_num` BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `resume` BLOB NOT NULL,
+    `smu_id` BIGINT UNSIGNED NOT NULL REFERENCES accounts(smu_id),
+    `grade` INT UNSIGNED NOT NULL
+);
+
+CREATE TABLE `cs4345`.`application_times` (
+    `id?` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `time_slot` INT NOT NULL,
+    `app_num` BIGINT UNSIGNED NOT NULL REFERENCES applications(application_num)
+);
