@@ -4,6 +4,7 @@ axios.defaults.withCredentials = true
 export const WS_ENDPOINT = "ws://localhost:8000";
 export const BACKEND_ENDPOINT = "http://localhost:8000";
 
+export var currentUser = undefined;
 
 export const registerAccount = async (credentials) =>  {
     console.log("Registering...");
@@ -24,6 +25,7 @@ export const logIntoAccount = async (user) => {
         console.log(`Couldn't log in. ${res.status}`)
         return null;
     }
+    currentUser = res;
     return res.data;
 };
 

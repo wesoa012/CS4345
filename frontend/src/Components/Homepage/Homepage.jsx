@@ -3,6 +3,8 @@ import React from "react";
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router";
 import { logout } from "../../api/loginApi";
+import { StudentDashboard } from "../Dashboards/StudentDashboard";
+import { ProfessorDashboard } from "../Dashboards/ProfessorDashboard";
 
 export const Homepage = () => {
     // let curruser = CurrUserContext

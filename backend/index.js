@@ -3,6 +3,7 @@ const express = require('express');
 const accountRoutes = require('./routes/account' );
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login' );
+const courseRoutes = require('./routes/course');
 const {createModelsMiddleware} = require('./middleware/model-middleware' );
 
 const cors = require('cors');
@@ -35,6 +36,9 @@ app.use('/login', loginRoutes);
 
 //register routes
 app.use('/register', registerRoutes);
+
+//course routes
+app.use('/courses', courseRoutes);
 
 app.listen(port, () => {
     console.log(`This app is listening on port ${port}`);

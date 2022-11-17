@@ -2,12 +2,11 @@ const knex = require('../database/knex');
 const COURSES_TABLE = 'courses';
     
 const createCourse = async (body) => {
-    const course_id = body.course_id;
     const course_name = body.course_name;
     const description = body.description;
     const professor_id = body.professor_id;
     const syllabus = body.syllabus;
-    return this.getByCourseId(course_id);
+    return knex(COURSES_TABLE).insert({course_name, description, professor_id, syllabus});
 }
 
 const getAllCourses = async () => {
