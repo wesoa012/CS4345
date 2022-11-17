@@ -11,6 +11,8 @@
 -- DROP TABLE `cs4345`.`accounts`;
 
 -- ACCOUNT TABLE
+CREATE DATABASE IF NOT EXISTS cs4345;
+USE cs4345;
 CREATE TABLE `cs4345`.`accounts` (
     `smu_id` BIGINT UNSIGNED NOT NULL PRIMARY KEY,
     `password` VARCHAR(255) NOT NULL,
@@ -18,7 +20,6 @@ CREATE TABLE `cs4345`.`accounts` (
     `last_name` VARCHAR(255) NOT NULL,
     `role_id` BIGINT UNSIGNED NOT NULL,
     `email` VARCHAR(255) NOT NULL
-
 );
 
 CREATE TABLE `cs4345`.`courses` (
