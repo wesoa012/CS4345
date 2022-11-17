@@ -1,5 +1,6 @@
 import { currentUser } from "../../api/loginApi";
 import { Link } from "react-router-dom";
+import { getCourses } from "../../api/courseApi";
 
 export const CourseList = ({justMine}) => {
     const sample = [
@@ -14,7 +15,7 @@ export const CourseList = ({justMine}) => {
         
     }
 
-    if (justMine === true) {
+    if (justMine === true) { //FIXME not implemented yet
         return <>
             <ul className="list-unstyled px-0 mx-0">
                 {
@@ -43,25 +44,31 @@ export const CourseList = ({justMine}) => {
             </ul>
         </>;
     } else {
+        const courses = [];
+        courses.push(getCourses());
+
         return <>
             <ul className="list-unstyled px-0 mx-0">
                 {
-                    sample.map((course, index) => {
+                    courses.map((course, index) => {
                         return (<li key={index} className="list-group-item mb-3">
-                            <Link to={"/courseView/" + course.sectionID} style={{textDecoration: 'none'}}>
+                            <Link to={"/courseView/" + course.course_id} style={{textDecoration: 'none'}}> {/*FIXME need to fix link*/}
                             <ul className="list-group px-0">
                                 <li className="list-group-item bg-secondary">
                                     <div className="row">
-                                        <span className="">CS {course.number} <span className="float-end">{course.name}</span></span>
+                                        <span className="">CS {course.name} {/*<span className="float-end">{course.name}</span>*/}</span>
                                     </div>
                                 </li>
-                                <li className="list-group-item  bg-light">
+                                <li>
+                                    {course.description}
+                                </li>
+                                {/* <li className="list-group-item  bg-light">
                                     <div className="row py-2">
                                         <div className="col-6 text-muted">
                                             <span>Section: 00{course.sectionID}</span>
                                         </div>
                                     </div>
-                                </li>
+                                </li> */}
                             </ul>
                             </Link>
                         </li>)}

@@ -17,7 +17,7 @@ export const getCourses = async () => {
 };
 
 export const addCourse = async (course) => {
-    const res = await axios.put(`${BACKEND_ENDPOINT}/courses`, course);
+    const res = await axios.post(`${BACKEND_ENDPOINT}/courses`, course);
 
     if(res.status !== 201){
         console.log(`Couldn't add course. ${res.status}`)
