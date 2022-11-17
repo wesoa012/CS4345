@@ -1,4 +1,5 @@
 import { currentUser } from "../../api/loginApi";
+import { Link } from "react-router-dom";
 
 export const CourseList = ({justMine}) => {
     const sample = [
@@ -19,12 +20,14 @@ export const CourseList = ({justMine}) => {
                 {
                     sample.map((course, index) => {
                         return (<li key={index} className="list-group-item mb-3">
+                        <Link to={"/courseView/" + course.sectionID} style={{textDecoration: 'none'}}>
                             <ul className="list-group px-0">
                                 <li className="list-group-item bg-secondary">
                                     <div className="row">
                                         <span className="">CS {course.number} <span className="float-end">{course.name}</span></span>
                                     </div>
                                 </li>
+                                asdasdsaasass
                                 <li className="list-group-item  bg-light">
                                     <div className="row py-2">
                                         <div className="col-6 text-muted">
@@ -33,6 +36,7 @@ export const CourseList = ({justMine}) => {
                                     </div>
                                 </li>
                             </ul>
+                            </Link>
                         </li>)}
                     )
                 }
@@ -44,6 +48,7 @@ export const CourseList = ({justMine}) => {
                 {
                     sample.map((course, index) => {
                         return (<li key={index} className="list-group-item mb-3">
+                            <Link to={"/courseView/" + course.sectionID} style={{textDecoration: 'none'}}>
                             <ul className="list-group px-0">
                                 <li className="list-group-item bg-secondary">
                                     <div className="row">
@@ -58,6 +63,7 @@ export const CourseList = ({justMine}) => {
                                     </div>
                                 </li>
                             </ul>
+                            </Link>
                         </li>)}
                     )
                 }

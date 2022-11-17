@@ -11,6 +11,7 @@ import { SignUpPage } from "./Components/Login/SignUpPage";
 import ResponsiveAppBar from "./Components/ResponsiveAppBar/ResponsiveAppBar";
 import { CourseList } from "./Components/Courses/CourseList";
 import { SubmittedApplications } from "./Components/StudentViews/SubmittedApplications";
+import { AddCourse } from './Components/Courses/AddCourse';
 
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -35,6 +36,7 @@ export const App = () => {
                     <Route path="/signup" element={<SignUpPage />} />
                     {/* <Route path="*" element={<LostPage/>}/> */}
                     <Route path="/courses" element={<CourseList />}/>
+                    <Route path='/addCourse' element={<AddCourse/>}/>
                 </Routes>
             </BrowserRouter>
     </div>
