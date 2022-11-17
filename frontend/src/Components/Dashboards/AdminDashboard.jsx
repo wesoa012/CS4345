@@ -11,7 +11,7 @@ export const AdminDashboard = () => {
     const navigate = useNavigate();
 
     return (<div className="Dashboard">
-            <Button className="btn btn-primary" onClick={() => {navigate(`/accounts/${currUser.smu_id}/applications`)}}>Submitted Applications</Button>
-            <Button className="btn btn-primary" onClick={() => {navigate("/applications")}}>Applications</Button>
+        Admin
+            <Button className="btn btn-primary" onClick={() => {navigate(`/accounts`)}}>Search People</Button>
     </div >)
 }

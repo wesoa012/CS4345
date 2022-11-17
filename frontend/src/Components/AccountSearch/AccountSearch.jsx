@@ -60,8 +60,7 @@ export const AccountSearch = () => {
         changeRoleId(account.smu_id, new_role)
     }
     const find = (account) => {
-        if(smu_id === '')
-        {
+        if (smu_id === '') {
             return true;
         }
         if (String(account.smu_id).indexOf(smu_id) !== -1) {
@@ -112,15 +111,18 @@ export const AccountSearch = () => {
                             <TableCell align="left">{account.first_name} {account.last_name}</TableCell>
                             <TableCell align="right">&nbsp;</TableCell>
                             <TableCell align="center">
+                            <FormControl sx={{ m: 1, minWidth: 120 }}>
                                 <Select
                                     value={account.role_id}
-                                    displayEmpty
                                     onChange={event => setAcctType(account, event.target.value)}
+                                    displayEmpty
+                                    inputProps={{ 'aria-label': 'Without label' }}
                                 >
                                     <MenuItem value={1}>Student</MenuItem>
                                     <MenuItem value={2}>Professor</MenuItem>
                                     <MenuItem value={3}>Admin</MenuItem>
                                 </Select>
+                                </FormControl>
                             </TableCell>
                         </TableRow>
                         )
