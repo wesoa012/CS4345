@@ -19,6 +19,11 @@ export const changeRoleId = async (smu_id, new_role) =>  {
 export const getAllAccounts = async () => {
     console.log("Getting All Accounts - Frontend")
     const res = await axios.get(`${BACKEND_ENDPOINT}/accounts`);
+    return res;
+};
 
-}
-
+export const getAccountbyId = async (id) => {
+    console.log(`Getting Account with id = ${id} - Frontend`)
+    const res = await axios.get(`${BACKEND_ENDPOINT}/accounts/${id}`);
+    return res;
+};
