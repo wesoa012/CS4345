@@ -22,7 +22,7 @@ router.put('/:id', async(req, res, next) => {
         const cId = req.params.course_id;
         const body = req.body;
         console.log(body);
-        const result = await req.models.course.updateCourseData(id, body);
+        const result = await req.models.course.updateCourseData(cId, body);
         res.status(200).json(result);
     } catch (err) {
         console.error('Course update failed:', err);
