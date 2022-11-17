@@ -35,7 +35,8 @@ router.put('/:id/role', async (req, res, next) => {
         res.status(400).send();
     }
     else {
-        const accountByID = await req.models.account.changeRole(accountId, res.new_role);
+        console.log("backend route role_id =", req.body.new_role)
+        const accountByID = await req.models.account.changeRole(accountId, req.body.new_role);
         res.status = 200;
         res.json(accountByID);
     }
