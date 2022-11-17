@@ -56,8 +56,18 @@ export const AccountSearch = () => {
         _accounts[_accounts.indexOf(account)].role_id = new_role;
         setAccounts(_accounts);
         console.log("account after role change =", account)
-        console.log("frontend new role =",new_role)
+        console.log("frontend new role =", new_role)
         changeRoleId(account.smu_id, new_role)
+    }
+    const find = (account) => {
+        if(smu_id === '')
+        {
+            return true;
+        }
+        if (String(account.smu_id).indexOf(smu_id) !== -1) {
+            return true
+        }
+        return false;
     }
 
     if (!!accounts && accounts.length !== 0) {
@@ -92,7 +102,7 @@ export const AccountSearch = () => {
                 <TableBody>
                     {accounts.map((account, idx) => {
 
-                        return <TableRow
+                        return (find(account) && <TableRow
                             key={idx}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
@@ -112,8 +122,8 @@ export const AccountSearch = () => {
                                     <MenuItem value={3}>Admin</MenuItem>
                                 </Select>
                             </TableCell>
-
                         </TableRow>
+                        )
                     })}
                 </TableBody>
             </Table>
