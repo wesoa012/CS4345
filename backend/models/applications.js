@@ -1,5 +1,5 @@
 const knex = require('../database/knex');
-const ACCOUNT_TABLE = 'applications';
+const APPLICATIONS_TABLE = 'applications';
 
 const createApplication = async (body) => {
     const application_num = body.application_num;
@@ -10,25 +10,25 @@ const createApplication = async (body) => {
 }
 
 const getAllApplications = async () => {
-    const query = knex(APPLICATION_TABLE)
+    const query = knex(APPLICATIONS_TABLE)
     const results = await query;
     return results;
 }
 
 const getByApplicationNum = async (application_num) => {
-    const query = knex(APPLICATION_TABLE).where({ application_num })
+    const query = knex(APPLICATIONS_TABLE).where({ application_num })
     const results = await query;
     return results;
 }
 
 const getBySMUId = async (smu_id) => {
-    const query = knex(APPLICATION_TABLE).where({ smu_id })
+    const query = knex(APPLICATIONS_TABLE).where({ smu_id })
     const results = await query;
     return results;
 }
 
 const getByGrade = async (grade) => {
-    const query = knex(APPLICATION_TABLE).where({ grade })
+    const query = knex(APPLICATIONS_TABLE).where({ grade })
     const results = await query;
     return results;
 }
