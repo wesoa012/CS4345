@@ -31,18 +31,6 @@ const getByCourseId = async (course_id) => {
     return results;
 }
 
-const getByCourseName = async (course_name) => {
-    const query = knex(COURSES_TABLE).where({ course_name })
-    const results = await query;
-    return results;
-}
-
-const getByProfessorId = async (course_name) => {
-    const query = knex(COURSES_TABLE).where({ professor_id })
-    const results = await query;
-    return results;
-}
-
 const updateCourseData = async (course_id, professor_id) => {
     const course_name = body.course_name;
     const description = body.description;
@@ -80,13 +68,17 @@ const fetchCoursesByProfessor = async (professor_id) =>{
     return courses;
 }
 
+const fetchCourseTimes = async (course_id) => {
+    const times = knex(COURSE_TIMES_TABLE).where({course_id});
+    return times;
+}
+
 module.exports = {
     createCourse,
     getAllCourses,
     getByCourseId,
-    getByCourseName,
-    getByProfessorId,
     updateCourseData,
     addTimeslots,
-    fetchCoursesByProfessor
+    fetchCoursesByProfessor,
+    fetchCourseTimes
 }
