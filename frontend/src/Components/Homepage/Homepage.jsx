@@ -21,21 +21,26 @@ export const Homepage = () => {
 
     return (<div className="Homepage">
         
-            {localStorage.getItem("currUser") === "{}" && <div className="beforeLogin">
-                <Button type="button" className="btn btn-primary rounded" onClick={() => navigate("/login")}>Login</Button>
+            {localStorage.getItem("currUser") === "{}" && <div className="beforeLogin text-center" style={{'marginTop': '20em'}}>
+                <Button type="button" variant="contained" className="btn btn-primary rounded" onClick={() => navigate("/login")}>Login</Button>
             </div>}
             {localStorage.getItem("currUser") !== "{}" && <div className="loggedIn">
+                <h1 className="text-center">Welcome {currUser.first_name}</h1>
+                <br/>
+                <br/>
                 {/* student dashboard */}
                 {currUser.role_id === 1 && <StudentDashboard/>}
                 {/* professor dashboard */}
                 {currUser.role_id === 2 && <ProfessorDashboard/>}
                 {/* admin dashboard */}
                 {currUser.role_id === 3 && <AdminDashboard/>}
-                <h1>Welcome {currUser.first_name}</h1>
-                <Button type="button" className="btn btn-primary rounded" onClick={() => logout().then(() => {
-                    localStorage.setItem("currUser", "{}");
-                    navigate('/');
-                })}>Logout</Button>
+                <br/>
+                <div className="text-center">
+                    <Button variant="contained" type="button" className="btn btn-primary rounded" onClick={() => logout().then(() => {
+                        localStorage.setItem("currUser", "{}");
+                        navigate('/');
+                    })}>Logout</Button>
+                </div>
             </div>}
 
     </div >)

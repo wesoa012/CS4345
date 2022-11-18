@@ -76,53 +76,66 @@ export const LoginPage = (props) => {
 
     // HTML
     return <section id="loginView">
-        <h1 class="text-success">Login</h1>
-        <form className="container">
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">SMU ID</InputLabel>
-                <OutlinedInput
-                    id="outlined-adornment-password"
-                    type='text'
-                    value={smu_id}
-                    onChange={event => setSmu_id(event.target.value)}
-                    label="SMU ID"
-                />
-            </FormControl>
+        <h1 className="text-center">Login</h1>
+        <div className="text-center">
+            <form className="container">
+                <div>
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-password">SMU ID</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-password"
+                            type='text'
+                            value={smu_id}
+                            onChange={event => setSmu_id(event.target.value)}
+                            label="SMU ID"
+                        />
+                    </FormControl>
+                </div>
 
-
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                <OutlinedInput
-                    id="outlined-adornment-password"
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={event => setPassword(event.target.value)}
-                    endAdornment={
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                            >
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                    }
-                    label="Password"
-                />
-            </FormControl>
-
-
-            <Button
-                type="button"
-                onClick={() => login()}
-                className="btn btn-primary">
-                Login
-            </Button>
-            {/* <GenericButton label="Login" click="/loggedIn" /> */}
-            <p className="mb-0">or</p>
-            <Button label="Sign Up" onClick={() => navigate("/signup")} className="btn btn-primary" >Signup</Button>
-        </form>
+                <div>
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-password"
+                            type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={event => setPassword(event.target.value)}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            label="Password"
+                        />
+                    </FormControl>
+                </div>
+                
+                <div>
+                    <Button
+                        type="button"
+                        onClick={() => login()}
+                        className="btn btn-primary"
+                        variant="contained">
+                        Login
+                    </Button>
+                    {/* <GenericButton label="Login" click="/loggedIn" /> */}
+                    <p className="mb-0">or</p>
+                    <Button 
+                        label="Sign Up"
+                        onClick={() => navigate("/signup")} 
+                        className="btn btn-primary" 
+                        variant="contained">
+                            Signup
+                        </Button>
+                </div>
+            </form>
+        </div>
     </section>
 }

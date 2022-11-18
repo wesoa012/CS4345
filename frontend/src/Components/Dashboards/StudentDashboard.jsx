@@ -10,9 +10,11 @@ export const StudentDashboard = () => {
 
     const navigate = useNavigate();
 
-    return (<div className="Dashboard">
-        Student
-            <Button className="btn btn-primary" onClick={() => {navigate("/applications")}}>View Courses</Button>
-            <Button className="btn btn-primary" onClick={() => {navigate(`/accounts/${currUser.smu_id}/applications`)}}>Submitted Applications</Button>
+    return (<div className="Dashboard text-center">
+        
+            <Button variant="contained" className="btn btn-primary" onClick={() => {navigate("/applications")}}>View Courses</Button>
+            <br/>
+            <br/>
+            <Button variant="contained" className="btn btn-primary" onClick={() => {navigate(`/accounts/${currUser.smu_id}/applications`)}}>Submitted Applications</Button>
     </div >)
 }
