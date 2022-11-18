@@ -2,15 +2,24 @@ import { Button } from "@mui/material";
 import React from "react";
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { getCoursesByProfessorId } from "../../api/courseApi";
 
 export const ProfessorCourses = () => {
 
     const [courses, setCourses] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         let currUser = JSON.parse(localStorage.getItem("currUser"))
         getCoursesByProfessorId(currUser.smu_id).then(async res => {
             setCourses([...res.data]);
+            console.log("courses info =", res.data);
         })
     }, []);
 
@@ -48,7 +57,7 @@ export const ProfessorCourses = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {accounts.map((coures, idx) => {
+                    {courses.map((course, idx) => {
 
                         return (<TableRow
                             key={idx}
@@ -58,11 +67,11 @@ export const ProfessorCourses = () => {
                                 {course.course_name}
                             </TableCell>
                             <TableCell align="left">{course.course_id}</TableCell>
-                            <TableCell align="right">
-                                {course.desription.length <= 25 && `${course.desription}`}
-                                {course.desription.length > 25 && `${course.desription.substring(0, 22)}...`}
+                            <TableCell align="left">
+                                {course.description.length <= 50 && `${course.description}`}
+                                {course.description.length > 50 && `${course.description.substring(0, 47)}...`}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell align="right">
                                 <Button
                                     endIcon={<ArrowForwardIcon />}
                                     onClick={() => navigate(`/courses/${course.course_id}`)}>
