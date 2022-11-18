@@ -73,43 +73,24 @@ router.get('/', async (req, res, next) => {
     next();
 });
 
-// get by course id
+// get by course name
 router.get('/:course_id', async (req, res, next) => {
     try {
-        const id = req.params.course_id;
-        const result = await req.models.course.getCourseId(id);
-        res.status(200).json(result);
+        const course_id = req.params.course_id;
+        console.log("getting course id =", course_id)
+        const course = await req.models.course.getByCourseId(course_id);
+        const timeslots = await req.models.course.fetchCourseTimes(course_id);
+        let results = course[0];
+        results.timeslots = timeslots;
+        console.log("Results =",results);
+        // return results;
+        res.status(200).json(results);
+        next();
     } catch (err) {
-        console.error('Course not found:', err);
-        res.status(500).json({ message: err.toString() });
+        // console.error('Course not found:', err);
+        // res.status(500).json({ message: err.toString() });
+        // next();
     }
-    next();
-});
-
-// get by course name
-router.get('/:course_name', async (req, res, next) => {
-    try {
-        const name = req.params.course_name;
-        const result = await req.models.course.getByCourseName(name);
-        res.status(200).json(result);
-    } catch (err) {
-        console.error('Course not found:', err);
-        res.status(500).json({ message: err.toString() });
-    }
-    next();
-});
-
-// get by professor id
-router.get('/:professor_id', async (req, res, next) => {
-    try {
-        const id = req.params.professor_id;
-        const result = await req.models.course.getByProfessorId(id);
-        res.status(200).json(result);
-    } catch (err) {
-        console.error('Course not found:', err);
-        res.status(500).json({ message: err.toString() });
-    }
-    next();
 });
 
 module.exports = router;
