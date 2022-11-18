@@ -16,12 +16,20 @@ export const getCourses = async () => {
 
 };
 
-export const addCourse = async (course) => {
-    const res = await axios.post(`${BACKEND_ENDPOINT}/courses`, course);
+export const addCourse = async (course, currUser) => {
+    let object = {course: course, professor: currUser};
+    console.log("outgoing object =", object)
+    const res = await axios.post(`${BACKEND_ENDPOINT}/courses`, object);
+
 
     if(res.status !== 201){
         console.log(`Couldn't add course. ${res.status}`)
         return null;
     }
-    return res;
+    else
+    {
+        console.log("sucessfully created course");
+        return res;
+    }
+    
 }
