@@ -35,9 +35,21 @@ export const addCourse = async (course, currUser) => {
 
 export const getCoursesByProfessorId = async (professor_id) => {
     const res = await axios.get(`${BACKEND_ENDPOINT}/accounts/${professor_id}/courses`);
-    if (res.status !== 201) {
+    if (res.status !== 200) {
         console.log(`Couldn't get professor courses. ${res.status}`)
-        return null;
+        return [];
+    }
+    else {
+        console.log("Got the courses");
+        return res;
+    }
+}
+
+export const getCourseById = async (course_id) => {
+    const res = await axios.get(`${BACKEND_ENDPOINT}/courses/${course_id}`);
+    if (res.status !== 200) {
+        console.log(`Couldn't get courses. ${res.status}`)
+        return [];
     }
     else {
         console.log("Got the courses");
