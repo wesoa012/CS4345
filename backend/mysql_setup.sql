@@ -35,18 +35,21 @@ CREATE TABLE `cs4345`.`course_times` (
     `day` INT NOT NULL,
     `start` INT NOT NULL,
     `end` INT NOT NULL,
-    `course_id` BIGINT UNSIGNED NOT NULL REFERENCES applications(application_num)
+    `course_id` BIGINT UNSIGNED NOT NULL REFERENCES courses(course_id)
 );
 
 CREATE TABLE `cs4345`.`applications` (
     `application_num` BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `resume` BLOB NOT NULL,
     `smu_id` BIGINT UNSIGNED NOT NULL REFERENCES accounts(smu_id),
-    `grade` INT UNSIGNED NOT NULL
+    `grade` INT UNSIGNED NOT NULL,
+    `course_id` BIGINT UNSIGNED NOT NULL REFERENCES courses(course_id)
 );
 
 CREATE TABLE `cs4345`.`application_times` (
     `id?` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `time_slot` INT NOT NULL,
+    `day` INT NOT NULL,
+    `start` INT NOT NULL,
+    `end` INT NOT NULL,
     `app_num` BIGINT UNSIGNED NOT NULL REFERENCES applications(application_num)
 );
