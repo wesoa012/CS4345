@@ -79,91 +79,100 @@ export const SignUpPage = (props) => {
 
     // HTML
     return <section id="loginView">
-        <h1 className="text-success">Sign Up</h1>
-        <form className="container">
-
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">SMU ID</InputLabel>
-                <OutlinedInput
-                    id="outlined-adornment-password"
-                    type='text'
-                    value={smu_id}
-                    onChange={event => setSmu_id(event.target.value)}
-                    label="SMU ID"
-                />
-            </FormControl>
+        <h1 className="text-center">Sign Up</h1>
+        <div className="text-center">
+            <form className="container">
 
             <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">First Name</InputLabel>
-                <OutlinedInput
-                    id="outlined-adornment-password"
-                    type='text'
-                    value={firstName}
-                    onChange={event => setFirstName(event.target.value)}
-                    label="First Name"
-                />
-            </FormControl>
+                    <InputLabel htmlFor="outlined-adornment-password">SMU ID</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type='text'
+                        value={smu_id}
+                        onChange={event => setSmu_id(event.target.value)}
+                        label="SMU ID"
+                    />
+                </FormControl>
 
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Last Name</InputLabel>
-                <OutlinedInput
-                    id="outlined-adornment-password"
-                    type='text'
-                    value={lastName}
-                    onChange={event => setLastName(event.target.value)}
-                    label="Last Name"
-                />
-            </FormControl>
+                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">First Name</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type='text'
+                        value={firstName}
+                        onChange={event => setFirstName(event.target.value)}
+                        label="First Name"
+                    />
+                </FormControl>
 
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Email</InputLabel>
-                <OutlinedInput
-                    id="outlined-adornment-password"
-                    type='text'
-                    value={email}
-                    onChange={event => setEmail(event.target.value)}
-                    label="Email"
-                />
-            </FormControl>
+                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">Last Name</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type='text'
+                        value={lastName}
+                        onChange={event => setLastName(event.target.value)}
+                        label="Last Name"
+                    />
+                </FormControl>
 
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                <OutlinedInput
-                    id="outlined-adornment-password"
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={event => setPassword(event.target.value)}
-                    endAdornment={
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                            >
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                    }
-                    label="Password"
-                />
-            </FormControl>
+                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">Email</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type='text'
+                        value={email}
+                        onChange={event => setEmail(event.target.value)}
+                        label="Email"
+                    />
+                </FormControl>
+
+                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={event => setPassword(event.target.value)}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        label="Password"
+                    />
+                </FormControl>
+                <br/>
+                <br/>
+                <Button
+                    type="button"
+                    onClick={() => clickAddAccount()}
+                    variant="contained"
+                    className="btn btn-success text-light">
+                    Sign Up
+                </Button>
+            </form>
+        </div>
+
+        <br/>
+        <br/>
+
+        <div className="text-center">
+            <p className="fs-3" >Already Have an account?</p>
             <Button
                 type="button"
-                onClick={() => clickAddAccount()}
+                onClick={() => navigate('/login')}
                 variant="contained"
-                className="btn btn-success text-light">
-                Sign Up
+                className="btn btn-secondary text-light">
+                Login
             </Button>
-        </form>
-
-        <p className="fs-3" >Already Have an account?</p>
-        <Button
-            type="button"
-            onClick={() => navigate('/login')}
-            variant="contained"
-            className="btn btn-secondary text-light">
-            Login
-        </Button>
+        </div>
     </section>
 }

@@ -21,8 +21,8 @@ export const Homepage = () => {
 
     return (<div className="Homepage">
         
-            {localStorage.getItem("currUser") === "{}" && <div className="beforeLogin">
-                <Button type="button" className="btn btn-primary rounded" onClick={() => navigate("/login")}>Login</Button>
+            {localStorage.getItem("currUser") === "{}" && <div className="beforeLogin text-center" style={{'marginTop': '20em'}}>
+                <Button type="button" variant="contained" className="btn btn-primary rounded" onClick={() => navigate("/login")}>Login</Button>
             </div>}
             {localStorage.getItem("currUser") !== "{}" && <div className="loggedIn">
                 {/* student dashboard */}
