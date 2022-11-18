@@ -4,17 +4,47 @@ const express = require('express');
 router = express.Router();
 router.use(bodyParser.json());
 
+const checkTimeslots = (timeslots) => {
+    for (const i in timeslots) {
+        let slot = timeslots[i]
+        if (slot.day === '' || slot.start === '' || slot.end === '') {
+            console.log("Timeslot is blank at index ",i,"\ntimeslot =",slot)
+            return false;
+        }
+    }
+}
+
 router.post('/', async(req, res, next) => {
     try {
         const body = req.body;
+
+        //check validity ???? IT NO WORKY
+        // if(!body.course.course_name || !body.course.description || !checkTimeslots(body.course.timeslots))
+        // {
+        //     console.log("undefined area (syllabus not counted) =", body.course)
+        //     res.sendStatus(400);
+        //     next();
+        // }
+        if(body.professor.role_id !== 2)
+        {
+            console.log("User is not professor")
+            res.sendStatus(403);
+            next();
+        }
         console.log(body);
         const result = await req.models.course.createCourse(body);
-        res.status(201).json(result);
+        console.log("Result =",result)
+        const timeslots = body.course.timeslots;
+        for (const i in timeslots) {
+            const timeslotresult = await req.models.course.addTimeslots(timeslots[i], result[0])
+        }
+        res.sendStatus(201);
+        next();
     } catch (err) {
         console.error('Course creation failed:', err);
         res.status(500).json({ message: err.toString() });
+        next();
     }
-    next();
 });
 
 router.put('/:id', async(req, res, next) => {

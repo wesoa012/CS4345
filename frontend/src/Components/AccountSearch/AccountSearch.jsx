@@ -75,9 +75,9 @@ export const AccountSearch = () => {
                 <div className="container border-0 col-3 float-start">
 
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">SMU ID</InputLabel>
+                        <InputLabel htmlFor="smu-id">SMU ID</InputLabel>
                         <OutlinedInput
-                            id="outlined-adornment-password"
+                            id="smu-id"
                             type='text'
                             value={smu_id}
                             onChange={event => setSmu_id(event.target.value)}

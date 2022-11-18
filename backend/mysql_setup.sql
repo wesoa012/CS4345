@@ -32,7 +32,9 @@ CREATE TABLE `cs4345`.`courses` (
 
 CREATE TABLE `cs4345`.`course_times` (
     `id?` INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `time_slot` INT NOT NULL,
+    `day` INT NOT NULL,
+    `start` INT NOT NULL,
+    `end` INT NOT NULL,
     `course_id` BIGINT UNSIGNED NOT NULL REFERENCES applications(application_num)
 );
 
