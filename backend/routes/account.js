@@ -43,6 +43,13 @@ router.put('/:id/role', async (req, res, next) => {
     next();
 });
 
+router.get("/:professor_id/courses", async (req, res, next) => {
+    let professor_id = parseInt(req.params.professor_id);
+    const courses = await req.models.course.fetchCoursesByProfessor(professor_id);
+    res.json(courses)
+    next();
+});
+
 router.get("/", async (req, res, next) => {
     const accounts = await req.models.account.fetchAllAccounts();
     res.json(accounts)

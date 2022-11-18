@@ -31,30 +31,18 @@ const getByCourseId = async (course_id) => {
     return results;
 }
 
-const getByCourseName = async (course_name) => {
-    const query = knex(COURSES_TABLE).where({ course_name })
-    const results = await query;
-    return results;
-}
-
-const getByProfessorId = async (course_name) => {
-    const query = knex(COURSES_TABLE).where({ professor_id })
-    const results = await query;
-    return results;
-}
-
 const updateCourseData = async (course_id, professor_id) => {
     const course_name = body.course_name;
     const description = body.description;
     const syllabus = body.syllabus;
-    if (coures_name !== undefined) {
-        this.updateCourseName(course_id, professor_id);
+    if (course_name !== undefined) {
+        updateCourseName(course_id, professor_id);
     }
     if (description !== undefined) {
-        this.updateDescription(course_id, professor_id);
+        updateDescription(course_id, professor_id);
     }
     if (syllabus !== undefined) {
-        this.updateSyllabus(course_id, professor_id);
+        updateSyllabus(course_id, professor_id);
     }
     const newRecord = knex(COURSES_TABLE).where({ course_id });
     return newRecord;
@@ -62,22 +50,35 @@ const updateCourseData = async (course_id, professor_id) => {
 
 const updateCourseName = async (course_id, professor_id) => {
     const course_name = knex(COURSES_TABLE).where({ course_id }).where({ professor_id }).set({ course_name });
+    return course_name;
 }
 
 const updateDescription = async (course_id, professor_id) => {
     const description = knex(COURSES_TABLE).where({ course_id }).where({ professor_id }).set({ description });
+    return description;
 }
 
 const updateSyllabus = async (course_id, professor_id) => {
     const syllabus = knex(COURSES_TABLE).where({ course_id }).where({ professor_id }).set({ syllabus });
+    return syllabus;
+}
+
+const fetchCoursesByProfessor = async (professor_id) =>{
+    const courses = knex(COURSES_TABLE).where({professor_id});
+    return courses;
+}
+
+const fetchCourseTimes = async (course_id) => {
+    const times = knex(COURSE_TIMES_TABLE).where({course_id});
+    return times;
 }
 
 module.exports = {
     createCourse,
     getAllCourses,
     getByCourseId,
-    getByCourseName,
-    getByProfessorId,
     updateCourseData,
-    addTimeslots
+    addTimeslots,
+    fetchCoursesByProfessor,
+    fetchCourseTimes
 }

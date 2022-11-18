@@ -8,7 +8,11 @@ router.post('/', async(req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.course.createApplication(body);
+        const result = await req.models.application.createApplication(body);
+        const timeslots = body.timeslots;
+        for (const i in timeslots) {
+            const timeslotresult = await req.models.application.addTimeSlots(timeslots[i], result[0])
+        }
         res.status(201).json(result);
     } catch (err) {
         console.error('Application creation failed:', err);

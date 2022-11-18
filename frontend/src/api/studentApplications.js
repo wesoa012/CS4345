@@ -15,13 +15,17 @@ export const getUserSubmittedApplications = async (credentials) =>  {
     return res;
 };
 
-export const submitApplication = async (credentials) =>  {
-    console.log("Registering...");
-
-    const res = await axios.post(`${BACKEND_ENDPOINT}/courses/:id/applications`, credentials);
+export const postApplication = async (course, currUser, grade, resume, timeslots) =>  {
+    console.log("submitting application");
+    let object = {course: course, currUser: currUser, grade: grade, resume: resume, timeslots: timeslots}
+    const res = await axios.post(`${BACKEND_ENDPOINT}/applications`, object);
     if(res.status !== 201){
         console.log(`Couldn't post your application. ${res.status}`)
         return null;
+    }
+    else
+    {
+        console.log("sucessfully posted application")
     }
     return res;
 };
