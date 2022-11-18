@@ -1,12 +1,23 @@
 const knex = require('../database/knex');
 const APPLICATIONS_TABLE = 'applications';
+const APPLICATION_TIMES_TABLE = 'application_times';
 
 const createApplication = async (body) => {
-    const application_num = body.application_num;
+    const course_id = body.course.course_id
     const resume = body.resume;
-    const smu_id = body.smu_id;
+    const smu_id = body.currUser.smu_id;
     const grade = body.grade;
-    return this.getByApplicationNum(application_num);
+    return knex(APPLICATIONS_TABLE).insert({ resume, smu_id, grade, course_id })
+    // return getByApplicationNum(application_num);
+}
+
+const addTimeSlots = async (slot, anum) => {
+    console.log("Adding timeslot =", slot)
+    const app_num = anum
+    const day = slot.day;
+    const start = slot.start;
+    const end = slot.end;
+    return knex(APPLICATION_TIMES_TABLE).insert({ day, start, end, app_num});
 }
 
 const getAllApplications = async () => {
@@ -38,5 +49,6 @@ module.exports = {
     getAllApplications,
     getByApplicationNum,
     getBySMUId,
-    getByGrade
+    getByGrade,
+    addTimeSlots
 }
