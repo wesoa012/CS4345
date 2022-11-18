@@ -86,7 +86,7 @@ export const AddCourse = () => {
         </div>
         <div className="m-1">
             <FormControl sx={{ m: 0, width: '100%' }} variant="outlined">
-                <Textarea minRows={2} id="description"
+                <Textarea minRows={5} id="description"
                     value={description}
                     onChange={event => setDescription(event.target.value)}
                     placeholder="Description"
@@ -181,10 +181,20 @@ export const AddCourse = () => {
             </TableBody>
         </Table>
         <div className="row TimeSlotAddition">
-            <Button onClick={() => addToLength()}>Add Timeslot</Button>
+            <Button variant="contained" onClick={() => addToLength()}>Add Timeslot</Button>
         </div>
-        <Button className="btn btn-primary" onClick={() => {
-            addCourseFunct()
-        }}>Submit</Button>
+        <br/>
+        <div className="text-center">
+            <Button variant="contained" className="btn btn-primary" onClick={() => {
+                addCourseFunct()
+            }}>Submit</Button>
+        </div>
+        <br/>
+        <div className="text-center">
+            <Button variant="contained" className="btn btn-primary" onClick={() => {
+                navigate('/')
+            }}>Cancel</Button>
+        </div>
+        
     </div >;
 }
