@@ -16,6 +16,8 @@ import { AddCourse } from './Components/Courses/AddCourse';
 
 
 import 'bootstrap/dist/css/bootstrap.css';
+import { ProfessorCourses } from "./Components/Courses/ProfessorCourses";
+import { CourseView } from "./Components/Courses/CourseView";
 
 
 
@@ -38,9 +40,10 @@ export const App = () => {
                     {/* <Route path="*" element={<LostPage/>}/> */}
                     <Route path="/courses" element={<CourseList />}/>
                     <Route path='/addCourse' element={<AddCourse/>}/>
+                    <Route path='/courses/:id' element={<CourseView/>}/>
 
                     {/* Account specific stuffs */}
-                    <Route path="/accounts/:id" element={<Profile />} />
+                    {/* <Route path="/accounts/:id" element={<Profile />} /> */}
                     <Route path="/accounts/:id/applications" element={<SubmittedApplications/>}/>
                     <Route path='/accounts/:id/courses' element={<ProfessorCourses />} />
                 </Routes>
