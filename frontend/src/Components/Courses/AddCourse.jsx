@@ -12,6 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Select from '@mui/material/Select';
+import CloseIcon from '@mui/icons-material/Close';
 
 import Textarea from '@mui/joy/Textarea';
 import MenuItem from '@mui/material/MenuItem';
@@ -38,6 +39,13 @@ export const AddCourse = () => {
         _timeslots.push({ day: "", start: "", end: "" })
         setTimeslots([..._timeslots])
     }
+
+    const removeFromLength = () => {
+        let _timeslots = [...timeslots];
+        _timeslots.pop();
+        setTimeslots([..._timeslots]);
+    }
+
     const addCourseFunct = () => {
         addCourse({ courseName, description, syllabus, timeslots }, JSON.parse(localStorage.getItem("currUser")))
             .then(async res => {
@@ -99,6 +107,7 @@ export const AddCourse = () => {
                     <TableCell align="left">Day</TableCell>
                     <TableCell align="left">Start Time</TableCell>
                     <TableCell align="left">End Time</TableCell>
+                    <TableCell align="left">&nbsp;</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -175,6 +184,14 @@ export const AddCourse = () => {
                                     </Select>
                                 </FormControl>
                             </TableCell>
+                            <TableCell>
+                                <IconButton
+                                    aria-label="delete"
+                                    onClick={() => removeFromLength()}
+                                >
+                                    <CloseIcon />
+                                </IconButton>
+                            </TableCell>
                         </TableRow>
                     )
                 })}
@@ -183,18 +200,18 @@ export const AddCourse = () => {
         <div className="row TimeSlotAddition">
             <Button variant="contained" onClick={() => addToLength()}>Add Timeslot</Button>
         </div>
-        <br/>
+        <br />
         <div className="text-center">
             <Button variant="contained" className="btn btn-primary" onClick={() => {
                 addCourseFunct()
             }}>Submit</Button>
         </div>
-        <br/>
+        <br />
         <div className="text-center">
             <Button variant="contained" className="btn btn-primary" onClick={() => {
                 navigate('/')
             }}>Cancel</Button>
         </div>
-        
+
     </div >;
 }
