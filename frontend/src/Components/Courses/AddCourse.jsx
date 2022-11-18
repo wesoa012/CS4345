@@ -29,7 +29,7 @@ export const AddCourse = () => {
 
     const [courseName, setCourseName] = useState('');
     const [description, setDescription] = useState('');
-    const [timeslots, setTimeslots] = useState([])
+    const [timeslots, setTimeslots] = useState([{ day: "", start: "", end: "" }])
     const [syllabus, setSyllabus] = useState(0); //FIXME how to implement this?? 
     // ^ Not implementing yet, but will an upload field ^
 
@@ -37,6 +37,18 @@ export const AddCourse = () => {
         let _timeslots = [...timeslots];
         _timeslots.push({ day: "", start: "", end: "" })
         setTimeslots([..._timeslots])
+    }
+    const addCourseFunct = () => {
+        addCourse({ courseName, description, syllabus, timeslots }, JSON.parse(localStorage.getItem("currUser")))
+            .then(async res => {
+                if (res.status !== 201) {
+                    console.log("Error creating course", res)
+                }
+                else {
+                    console.log("Sucessfully created course", res)
+                    navigate(`/`);
+                }
+            })
     }
 
     const changeDay = (timeslot, day) => {
@@ -61,7 +73,7 @@ export const AddCourse = () => {
 
     return <div className="col-12 p-3">
         <div className="m-1">
-            <FormControl sx={{ m: 0, width: '100%'}} variant="outlined" className="">
+            <FormControl sx={{ m: 0, width: '100%' }} variant="outlined" className="">
                 <InputLabel htmlFor="course-name">Course Name</InputLabel>
                 <OutlinedInput
                     id="course-name"
@@ -73,13 +85,13 @@ export const AddCourse = () => {
             </FormControl>
         </div>
         <div className="m-1">
-        <FormControl sx={{ m: 0, width: '100%' }} variant="outlined">
-            <Textarea minRows={2} id="description"
-            value={description}
-            onChange={event => setDescription(event.target.value)}
-            placeholder="Description"
-            />
-        </FormControl>
+            <FormControl sx={{ m: 0, width: '100%' }} variant="outlined">
+                <Textarea minRows={2} id="description"
+                    value={description}
+                    onChange={event => setDescription(event.target.value)}
+                    placeholder="Description"
+                />
+            </FormControl>
         </div>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -127,7 +139,7 @@ export const AddCourse = () => {
                                         <MenuItem value={2}>9:00 AM</MenuItem>
                                         <MenuItem value={3}>10:00 AM</MenuItem>
                                         <MenuItem value={4}>11:00 AM</MenuItem>
-                                        <MenuItem value={5}>12:00 AM</MenuItem>
+                                        <MenuItem value={5}>12:00 PM</MenuItem>
                                         <MenuItem value={6}>1:00 PM</MenuItem>
                                         <MenuItem value={7}>2:00 PM</MenuItem>
                                         <MenuItem value={8}>3:00 PM</MenuItem>
@@ -150,7 +162,7 @@ export const AddCourse = () => {
                                         <MenuItem value={1}>9:00 AM</MenuItem>
                                         <MenuItem value={2}>10:00 AM</MenuItem>
                                         <MenuItem value={3}>11:00 AM</MenuItem>
-                                        <MenuItem value={4}>12:00 AM</MenuItem>
+                                        <MenuItem value={4}>12:00 PM</MenuItem>
                                         <MenuItem value={5}>1:00 PM</MenuItem>
                                         <MenuItem value={6}>2:00 PM</MenuItem>
                                         <MenuItem value={7}>3:00 PM</MenuItem>
@@ -172,8 +184,7 @@ export const AddCourse = () => {
             <Button onClick={() => addToLength()}>Add Timeslot</Button>
         </div>
         <Button className="btn btn-primary" onClick={() => {
-            addCourse({ courseName, description, syllabus, timeslots });
-            navigate(`/`);
+            addCourseFunct()
         }}>Submit</Button>
     </div >;
 }
